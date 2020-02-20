@@ -77,8 +77,25 @@ public class SingleLinkedList<T> implements Iterable<T> {
     }
 
     public T deleteAt(int index) {
-        //TODO реализовать в качестве ДЗ
-        return null;
+        if (index == 0) {
+            head = head.next;
+            return head.value;
+        }
+
+        Node<T> curr = head;
+        Node<T> prev = null;
+        for (int i = 0; i < index && curr != null; i++) {
+            prev = curr;
+            curr = curr.next;
+        }
+
+        if (curr != null) {
+            prev.next = curr.next;
+            return curr.value;
+        }
+        else {
+            return null;
+        }
     }
 
     private Node<T> findPrev(Node<T> node) {
@@ -90,26 +107,36 @@ public class SingleLinkedList<T> implements Iterable<T> {
     }
 
     public void push(T value) {
-        //TODO реализовать в качестве ДЗ
+        insertHead(value);
     }
 
     public T pop() {
-        //TODO реализовать в качестве ДЗ
-        return null;
+        return deleteHead();
     }
 
     public T peek() {
-        //TODO реализовать в качестве ДЗ
-        return null;
+        if(head==null){
+            return null;
+        }
+        return head.value;
     }
 
     public void enqueue(T value) {
-        //TODO реализовать в качестве ДЗ
+        boolean flagTail=false;
+        if(tail==null){
+            flagTail=true;
+        }
+        insertTail(value);
+        if(flagTail){
+            head=tail;
+        }
     }
 
     public T dequeue() {
-        //TODO реализовать в качестве ДЗ
-        return null;
+        if(head==null){
+            return null;
+        }
+        return deleteHead();
     }
 
     @Override
@@ -172,5 +199,32 @@ public class SingleLinkedList<T> implements Iterable<T> {
 
         System.out.println("After delete all");
         singleLinkedList.forEach(System.out::println);
+
+        singleLinkedList.deleteAt(5);
+        singleLinkedList.deleteAt(3);
+        singleLinkedList.deleteAt(2);
+        singleLinkedList.deleteAt(1);
+        singleLinkedList.forEach(System.out::println);
+
+        SingleLinkedList<Integer> stackList=new SingleLinkedList();
+        stackList.push(1);
+        stackList.push(2);
+        stackList.push(3);
+        stackList.push(4);
+
+
+        while(stackList.iterator().hasNext()){
+            System.out.println(stackList.pop());
+        }
+
+        SingleLinkedList<Integer> queueList=new SingleLinkedList<>();
+        queueList.enqueue(4);
+        queueList.enqueue(5);
+        queueList.enqueue(4);
+        queueList.enqueue(6);
+        while(queueList.iterator().hasNext()){
+            System.out.println(queueList.dequeue());
+        }
+
     }
 }
