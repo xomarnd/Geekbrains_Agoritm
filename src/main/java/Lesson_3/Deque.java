@@ -21,21 +21,21 @@ public class Deque<T> {
     }
 
     // добавление в конец очереди
-    public void PushBack(T value){
+    public void pushBack(T value){
         if (++tail == size)
             tail = 0;
         Deque[tail] = value;
     }
 
     //  добавление в начало очереди
-    void PushFront(int value){
+    void pushFront(int value){
         Deque[head] = value;
         if (--head < 0)
             head = size - 1;
     }
 
     //  выборка с конца очереди
-    public Object PopBack(){
+    public Object popBack(){
         Object ret = Deque[tail];
 
         if (--tail < 0)
@@ -44,7 +44,7 @@ public class Deque<T> {
     }
 
     // выборка с начала очереди
-    public Object PopFront(){
+    public Object popFront(){
         if (++head == size)
             head = 0;
         return Deque[head];
